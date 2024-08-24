@@ -17,12 +17,20 @@
       margin-left: auto;
       margin-right: auto;
     }
+    button {
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+    }
+    
+
   </style>
 </head>
 <body>
 
   <table border="0" id="tabla">
   </table>
+  <div class="box"></div>
   
 </body>
 
@@ -44,8 +52,11 @@
   console.log(year);
   const cantDiasDelMes = new Date(year, numMes, 0).getDate();
   console.log(cantDiasDelMes)
-
   let celdasVacias = 4; // posicion del dia en la semana
+
+  const searchDay = (e) => {
+    console.log(e.target.textContent)
+  }
   
   let html = '';
       html += `<caption>${mes[0].toLocaleUpperCase()+mes.slice(1)} ${year}</caption>`;
@@ -66,7 +77,7 @@
           }
           for(let i=1; i<= 7-celdasVacias; i++){
             diasDelMes++
-            diaNum === diasDelMes ? html += `<td style="border: 1px solid green;">${diasDelMes}</td>` : html += `<td>${diasDelMes}</td>`    
+            diaNum === diasDelMes ? html += `<td style="border: 1px solid green; border-radius: 5px;"><button onclick="searchDay(event)">${diasDelMes}</button></td>` : html += `<td><button onclick="searchDay(event)">${diasDelMes}</button></td>`    
           }
      html += `</tr>`
      for(let filas = 1; filas <= 6; filas++){
@@ -76,12 +87,15 @@
                   html += '';
               }else{  
                 diasDelMes++
-                diaNum === diasDelMes ? html += `<td style="border: 1px solid green; border-radius: 5px;">${diasDelMes}</td>` : html += `<td>${diasDelMes}</td>`    
+                diaNum === diasDelMes ? html += `<td style="border:1px solid green; border-radius: 5px;"><button onclick="searchDay(event)">${diasDelMes}</button></td>` : html += `<td><button onclick="searchDay(event)">${diasDelMes}</button></td>`
               }
           }
             html += `</tr>`
       }      
       $tabla.innerHTML = html;
+      
 
+    
+      
 </script>
 </html>
