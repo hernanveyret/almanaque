@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Almanaque</title>
+  <style>
+    body {
+      max-width: 100%;
+    }
+    table {
+      border: 1px solid green;
+      font-size: 16px;
+      text-align: center;
+      border-radius: 10px;
+      padding: 10px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <table border="0" id="tabla">
+  </table>
+  
+</body>
+
+<script>
+  const $tabla = document.getElementById('tabla');
+  const fecha = new Date()
+
+  // me de agosto 2024
+  let diasDelMes = 0; // numeros para mostrar en el almanaque, va a cortar cuando llegue a la cantidad de dias que tenga el mes en curso.
+  let diaNum = fecha.getDate(); // dia de hoy en numero.
+  console.log(diaNum)
+  const diaNombre = fecha.toLocaleString('es-ES', { weekday: 'long' }); // dia de la semana en letra.
+  console.log(diaNombre)
+  const mes = fecha.toLocaleString('es-ES', { month: 'long' }); // mes en letra
+  console.log('mes: ',mes)
+  const numMes = fecha.getMonth()
+  console.log('mes: ',numMes)
+  const year = fecha.getFullYear();
+  console.log(year);
+  const cantDiasDelMes = new Date(year, numMes, 0).getDate();
+  console.log(cantDiasDelMes)
+
+  let celdasVacias = 4; // posicion del dia en la semana
+  
+  let html = '';
+      html += `<caption>${mes[0].toLocaleUpperCase()+mes.slice(1)} ${year}</caption>`;
+      html += `<thead>`;
+        html += `<tr>`;
+          html += `<th>DO</th>`;
+          html += `<th>LU</th>`;
+          html += `<th>MA</th>`;
+          html += `<th>MI</th>`;
+          html += `<th>JU</th>`;
+          html += `<th>VI</th>`;
+          html += `<th>SA</th>`;
+        html += `</tr>`;
+      html += `</thead>`;
+      html += `<tr>`
+          for (let i=1; i <= celdasVacias; i++){
+            html += `<td></td>`;
+          }
+          for(let i=1; i<= 7-celdasVacias; i++){
+            diasDelMes++
+            diaNum === diasDelMes ? html += `<td style="border: 1px solid green;">${diasDelMes}</td>` : html += `<td>${diasDelMes}</td>`    
+          }
+     html += `</tr>`
+     for(let filas = 1; filas <= 6; filas++){
+            html += `<tr>`
+          for(let col = 1; col <= 7; col++){
+              if ( diasDelMes >= cantDiasDelMes){
+                  html += '';
+              }else{  
+                diasDelMes++
+                diaNum === diasDelMes ? html += `<td style="border: 1px solid green; border-radius: 5px;">${diasDelMes}</td>` : html += `<td>${diasDelMes}</td>`    
+              }
+          }
+            html += `</tr>`
+      }      
+      $tabla.innerHTML = html;
+
+</script>
+</html>
