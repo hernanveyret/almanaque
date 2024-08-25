@@ -43,17 +43,18 @@
   let diaNum = fecha.getDate(); // dia de hoy en numero.
   console.log(diaNum)
   const diaNombre = fecha.toLocaleString('es-ES', { weekday: 'long' }); // dia de la semana en letra.
-  console.log(diaNombre)
+  console.log('nombre del dia:',diaNombre)
   const mes = fecha.toLocaleString('es-ES', { month: 'long' }); // mes en letra
   console.log('mes: ',mes)
   const numMes = fecha.getMonth()
   console.log('mes: ',numMes)
   const year = fecha.getFullYear();
   console.log(year);
-  const cantDiasDelMes = new Date(year, numMes, 0).getDate();
+  const cantDiasDelMes = new Date(year, numMes + 1, 0).getDate();
   console.log(cantDiasDelMes)
-  let celdasVacias = 4; // posicion del dia en la semana
-
+  let celdasVacias = new Date(2024,numMes,1).getDay(); // posicion del dia de la semana en numero
+  console.log('celdas vacias',celdasVacias)
+  
   const searchDay = (e) => {
     console.log(e.target.textContent)
   }
